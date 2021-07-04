@@ -1,36 +1,30 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <div>
-      <p>
-        If Element is successfully added to this project, you'll see an
-        <code v-text="'<el-button>'"></code>
-        below
-      </p>
-      <el-button>el-button</el-button>
-    </div>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <el-row :gutter="10">
+      <el-col :span="3">
+        <div v-for="route in routers" :key="route.path">
+          <router-link :to="{name:route.name}">{{ route.name }}</router-link>
+        </div>
+      </el-col>
+      <el-col :span="21">
+        <router-view />
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { routes } from '@/router'
 export default {
-  name: 'app',
-  components: {
-    HelloWorld,
+  name: 'App',
+  data() {
+    return {
+      routers: routes
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
